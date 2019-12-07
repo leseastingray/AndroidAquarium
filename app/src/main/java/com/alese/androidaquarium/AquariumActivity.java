@@ -15,7 +15,6 @@ public class AquariumActivity extends AppCompatActivity
 {
     // Variables
     int createdCritterInt;
-    String createdCritterPicture;
     int critterPictureID;
 
 
@@ -46,7 +45,10 @@ public class AquariumActivity extends AppCompatActivity
         critterNameTextView.setText(aquariumCritter.getCritterFullName());
 
         // execute method to display appropriate critter image
-        displayCritterImage(aquariumCritter);
+        critterPictureID = displayCritterImage(aquariumCritter);
+
+        // Set the image resource to appropriate id
+        aquariumImageView.setImageResource(critterPictureID);
     }
 
     @Override
@@ -56,25 +58,90 @@ public class AquariumActivity extends AppCompatActivity
 
     }
     // TODO: ImageView
-    public void displayCritterImage(AquariumCritter aC)
+    public int displayCritterImage(AquariumCritter aC)
     {
         int id = 0;
-
+        // if a Stingray
+        /*
+        if (aC.getCritterType() == 0)
+        {
+            // if meh mood:
+            if (aC.getCritterMood() == 1)
+            {
+                id = R.drawable.meh_stingray;
+            }
+            // if good mood:
+            else if(aC.getCritterMood() == 2)
+            {
+                id = R.drawable.nice_stingray;
+            }
+            // if awesome mood:
+            else
+            {
+                id = R.drawable.awesome_stingray;
+            }
+        }
+        // if a Moray Eel:
+        if (aC.getCritterType() == 1)
+        {
+            // if meh mood:
+            if (aC.getCritterMood() == 1)
+            {
+                id = R.drawable.meh_eel;
+            }
+            // if good mood:
+            else if(aC.getCritterMood() == 2)
+            {
+                id = R.drawable.nice_eel;
+            }
+            // if awesome mood:
+            else
+            {
+                id = R.drawable.awesome_eel;
+            }
+        }
+         */
+        // if a Sea Snake
         if (aC.getCritterType() == 2)
         {
+            // if meh mood:
             if (aC.getCritterMood() == 1)
             {
                 id = R.drawable.meh_krait;
             }
+            // if good mood:
             else if(aC.getCritterMood() == 2)
             {
                 id = R.drawable.nice_krait;
             }
+            // if awesome mood:
             else
             {
                 id = R.drawable.awesome_krait;
             }
         }
+        // if a Frogfish:
+        /*
+        if (aC.getCritterType() == 3)
+        {
+            // if meh mood:
+            if (aC.getCritterMood() == 1)
+            {
+                id = R.drawable.meh_frogfish;
+            }
+            // if good mood:
+            else if(aC.getCritterMood() == 2)
+            {
+                id = R.drawable.nice_frogfish;
+             }
+             // if awesome mood:
+             else
+             {
+                id = R.drawable.awesome_frogfish;
+             }
+        }
+        */
+        // if a Sea Slug:
         else
         {
             if (aC.getCritterMood() == 1)
@@ -90,8 +157,7 @@ public class AquariumActivity extends AppCompatActivity
                 id = R.drawable.awesome_slug;
             }
         }
-        // Set the image resource to appropriate id
-        aquariumImageView.setImageResource(id);
+        return id;
     }
     // TODO: Interaction Buttons
     // TODO: Interaction Response TextView
