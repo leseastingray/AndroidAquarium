@@ -6,67 +6,86 @@ import java.util.Random;
 public class AquariumCritter
 {
     // Variables
-    private String critterType;
+    private int critterType;
     private String critterFullName;
     private String critterSize;
     private String critterMeal;
+    private String critterAbility;
+    // Variable for concatenating into picture file names for given critter
+    private String critterPictureName;
+    // Variable for holding critter picture file name (created via concatenation)
+    private String critterPictureFile;
     private String action;
     public String critterResponse = "";
     // Instantiate a Random object for critter reactions.
     private Random random = new Random();
 
     // Constructor with the different types of critter.
-    public AquariumCritter(String critterType)
+    public AquariumCritter(int critterType)
     {
         // Stingray
-        if (critterType == "Stingray")
+        if (critterType == 0)
         {
             critterFullName = "Bluespotted ribbontail ray";
             critterSize = "Small";
             critterMeal = "Worm";
+            critterAbility = "Venomous tail sting";
+            critterPictureName = "stingray";
             // Meh
             // Content
             // Happy
         }
         // Moray Eel
-        else if (critterType == "Moray Eel")
+        else if (critterType == 1)
         {
             critterFullName = "Giant moray";
             critterSize = "Large";
-            critterMeal = "Fish";
+            critterMeal = "Large Fish";
+            critterAbility = "Cooperative hunting";
+            critterPictureName = "eel";
             // Meh
             // Content
             // Happy
         }
         // Sea Krait
-        else if (critterType == "Sea Krait")
+        else if (critterType == 2)
         {
             critterFullName = "Banded sea krait";
             critterSize = "Medium";
             critterMeal = "Eel";
+            critterAbility = "Venomous bite";
+            critterPictureName = "krait";
             // Meh
             // Content
             // Happy
         }
         // Frogfish
-        else if (critterType == "Frogfish")
+        else if (critterType == 3)
         {
+            critterFullName = "Painted Frogfish";
             critterSize = "Small";
+            critterMeal = "Small fish";
+            critterAbility = "Dorsal spine lure";
+            critterPictureName = "frogfish";
             // Meh
             // Content
             // Happy
         }
-        // Lobster
+        // Sea slug
         else
         {
-            critterSize = "Small";
+            critterFullName = "Loch's Chromodoris";
+            critterSize = "Tiny";
+            critterMeal = "Sponge";
+            critterAbility = "Poisonous skin";
+            critterPictureName = "slug";
             // Meh
             // Content
             // Happy
         }
     }
-    // Returns the type of critter.
-    public String getCritterType()
+    // Returns AquariumCritter attributes.
+    public int getCritterType()
     {
         return critterType;
     }
@@ -82,6 +101,14 @@ public class AquariumCritter
     {
         return critterMeal;
     }
+    public String getCritterPictureName() {return critterPictureName; }
+
+    // Setters
+    public void setCritterType(int critterType)
+    {
+        this.critterType = critterType;
+    }
+
     // Returns the critter response.
     public String CritterResponse()
     {
@@ -94,13 +121,30 @@ public class AquariumCritter
         }
         else if (randomResponse == 2)
         {
-            critterResponse = "Nice, thanks.";
+            critterResponse = "Nice.";
         }
         else
         {
             critterResponse = "Awesome!";
         }
         return critterResponse;
+    }
+    // Returns critter response picture
+    public String CritterResponsePicture()
+    {
+        if (critterResponse == "Meh.")
+        {
+            critterPictureFile = "meh_" + critterPictureName + ".png";
+        }
+        else if (critterResponse == "Nice.")
+        {
+            critterPictureFile = "nice_" + critterPictureName + ".png";
+        }
+        else
+        {
+            critterPictureFile = "awesome_" + critterPictureName + ".png";
+        }
+        return critterPictureFile;
     }
 
 }
