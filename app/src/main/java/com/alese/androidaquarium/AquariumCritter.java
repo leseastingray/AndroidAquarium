@@ -15,6 +15,7 @@ public class AquariumCritter
     private String critterPictureName;
     // Variable for holding critter picture file name (created via concatenation)
     private String critterPictureFile;
+    public int critterMood;
     private String action;
     public String critterResponse = "";
     // Instantiate a Random object for critter reactions.
@@ -31,6 +32,7 @@ public class AquariumCritter
             critterMeal = "Worm";
             critterAbility = "Venomous tail sting";
             critterPictureName = "stingray";
+            critterMood = 3;
             // Meh
             // Content
             // Happy
@@ -43,6 +45,7 @@ public class AquariumCritter
             critterMeal = "Large Fish";
             critterAbility = "Cooperative hunting";
             critterPictureName = "eel";
+            critterMood = 1;
             // Meh
             // Content
             // Happy
@@ -55,6 +58,7 @@ public class AquariumCritter
             critterMeal = "Eel";
             critterAbility = "Venomous bite";
             critterPictureName = "krait";
+            critterMood = 2;
             // Meh
             // Content
             // Happy
@@ -67,6 +71,7 @@ public class AquariumCritter
             critterMeal = "Small fish";
             critterAbility = "Dorsal spine lure";
             critterPictureName = "frogfish";
+            critterMood = 1;
             // Meh
             // Content
             // Happy
@@ -79,6 +84,7 @@ public class AquariumCritter
             critterMeal = "Sponge";
             critterAbility = "Poisonous skin";
             critterPictureName = "slug";
+            critterMood = 2;
             // Meh
             // Content
             // Happy
@@ -102,6 +108,7 @@ public class AquariumCritter
         return critterMeal;
     }
     public String getCritterPictureName() {return critterPictureName; }
+    public int getCritterMood() {return critterMood; }
 
     // Setters
     public void setCritterType(int critterType)
@@ -117,14 +124,17 @@ public class AquariumCritter
 
         if (randomResponse == 1)
         {
+            critterMood = 1;
             critterResponse = "Meh.";
         }
         else if (randomResponse == 2)
         {
+            critterMood = 2;
             critterResponse = "Nice.";
         }
         else
         {
+            critterMood = 3;
             critterResponse = "Awesome!";
         }
         return critterResponse;
