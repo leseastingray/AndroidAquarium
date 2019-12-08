@@ -17,6 +17,7 @@ public class AquariumCritter
     // Variable for holding critter picture file name (created via concatenation)
     private String critterPictureFile;
     public int critterMood;
+    public int critterResponseInt;
     public String critterResponse = "";
     // Instantiate a Random object for critter reactions.
     private Random random = new Random();
@@ -30,7 +31,7 @@ public class AquariumCritter
             critterType = 0;
             critterFullName = "Bluespotted ribbontail ray";
             critterSize = "Small";
-            critterMeal = "Worm";
+            critterMeal = "worm";
             critterAbility = "Venomous tail sting";
             critterPictureName = "stingray";
             critterMood = 3;
@@ -44,7 +45,7 @@ public class AquariumCritter
             critterType = 1;
             critterFullName = "Giant moray";
             critterSize = "Large";
-            critterMeal = "Large Fish";
+            critterMeal = "large fish";
             critterAbility = "Cooperative hunting";
             critterPictureName = "moray";
             critterMood = 1;
@@ -58,7 +59,7 @@ public class AquariumCritter
             critterType = 2;
             critterFullName = "Banded sea krait";
             critterSize = "Medium";
-            critterMeal = "Eel";
+            critterMeal = "small eel";
             critterAbility = "Venomous bite";
             critterPictureName = "krait";
             critterMood = 2;
@@ -72,7 +73,7 @@ public class AquariumCritter
             critterType = 3;
             critterFullName = "Painted Frogfish";
             critterSize = "Small";
-            critterMeal = "Small fish";
+            critterMeal = "small fish";
             critterAbility = "Dorsal spine lure";
             critterPictureName = "frogfish";
             critterMood = 1;
@@ -86,7 +87,7 @@ public class AquariumCritter
             critterType = 4;
             critterFullName = "Loch's chromodoris";
             critterSize = "Tiny";
-            critterMeal = "Sponge";
+            critterMeal = "sponge";
             critterAbility = "Poisonous skin";
             critterPictureName = "slug";
             critterMood = 2;
@@ -121,45 +122,45 @@ public class AquariumCritter
         this.critterType = critterType;
     }
 
+    public void setCritterMood(int critterResponseInt)
+    {
+        this.critterMood = critterResponseInt;
+    }
+
     // Returns the critter response.
-    public String CritterResponse()
+    public int CritterResponseNumber()
     {
         // Random selection
         int randomResponse = random.nextInt(3) + 1;
 
         if (randomResponse == 1)
         {
-            critterMood = 1;
-            critterResponse = "Meh.";
+            critterResponseInt = 1;
         }
         else if (randomResponse == 2)
         {
-            critterMood = 2;
+            critterResponseInt = 2;
+        }
+        else
+        {
+            critterResponseInt = 3;
+        }
+        return critterResponseInt;
+    }
+    public String CritterResponse(int critterResponseInt)
+    {
+        if (critterResponseInt == 1)
+        {
+            critterResponse = "Meh...";
+        }
+        else if (critterResponseInt == 2)
+        {
             critterResponse = "Nice.";
         }
         else
         {
-            critterMood = 3;
             critterResponse = "Awesome!";
         }
         return critterResponse;
     }
-    // Returns critter response picture
-    public String CritterResponsePicture()
-    {
-        if (critterResponse == "Meh.")
-        {
-            critterPictureFile = "meh_" + critterPictureName + ".png";
-        }
-        else if (critterResponse == "Nice.")
-        {
-            critterPictureFile = "nice_" + critterPictureName + ".png";
-        }
-        else
-        {
-            critterPictureFile = "awesome_" + critterPictureName + ".png";
-        }
-        return critterPictureFile;
-    }
-
 }

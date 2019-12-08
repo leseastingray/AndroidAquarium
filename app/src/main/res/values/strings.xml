@@ -16,4 +16,7 @@
     <string name="new_aquarium_button">New Aquarium</string>
 
     <string name="aquarium_image_description">Critter Image</string>
+    <string name="feed_button">Feed</string>
+    <string name="interact_button">Interact</string>
+    <string name="clean_button">Clean</string>
 </resources>

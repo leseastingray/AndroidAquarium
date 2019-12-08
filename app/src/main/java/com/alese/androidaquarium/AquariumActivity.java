@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.Toast;
 import android.graphics.BitmapFactory.Options;
 
@@ -18,10 +20,19 @@ public class AquariumActivity extends AppCompatActivity
     // Variables
     private int createdCritterInt;
     private int critterPictureID;
+    private String critterFood;
+    private String critterShortName;
+    private int critterResponseNumber;
+    private String critterResponseText;
+    private AquariumCritter aquariumCritter;
 
     // Widget Variables
     ImageView aquariumImageView;
     TextView critterNameTextView;
+    TextView critterResponseTextView;
+    Button feedButton;
+    Button interactButton;
+    Button cleanButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,13 +48,18 @@ public class AquariumActivity extends AppCompatActivity
         // Get the intent and extras from Selection Activity
         Intent intent = getIntent();
         createdCritterInt = intent.getExtras().getInt(SelectionActivity.CRITTER_SELECTION);
-        AquariumCritter aquariumCritter = new AquariumCritter(createdCritterInt);
+        aquariumCritter = new AquariumCritter(createdCritterInt);
 
         // Widgets
         aquariumImageView = (ImageView)findViewById(R.id.aquariumImageView);
 
         critterNameTextView = (TextView) findViewById(R.id.critterNameTextView);
         critterNameTextView.setText(aquariumCritter.getCritterFullName());
+
+        critterResponseTextView = (TextView)findViewById(R.id.responseTextView);
+        feedButton = (Button)findViewById(R.id.feedButton);
+        interactButton = (Button)findViewById(R.id.interactButton);
+        cleanButton = (Button)findViewById(R.id.cleanButton);
 
         BitmapFactory.Options bOptions = new BitmapFactory.Options();
         bOptions.inSampleSize = 4;
@@ -160,5 +176,47 @@ public class AquariumActivity extends AppCompatActivity
         return id;
     }
     // TODO: Interaction Buttons
-    // TODO: Interaction Response TextView
+    public void Feed(View v)
+    {
+        // Get the critter's food and name
+        critterFood = aquariumCritter.getCritterMeal();
+        critterShortName = aquariumCritter.getCritterPictureName();
+        // Display action
+        Toast.makeText(this, "You feed a " + critterFood + " to your " + critterShortName, Toast.LENGTH_SHORT).show();
+        // Call critter response method
+        CritterInteractResponse(aquariumCritter);
+
+    }
+    public void Interact(View v)
+    {
+        // Get the critter's name
+        critterShortName = aquariumCritter.getCritterPictureName();
+        // Display action
+        Toast.makeText(this, "You interact with your " + critterShortName, Toast.LENGTH_SHORT).show();
+        // Call critter response method
+        CritterInteractResponse(aquariumCritter);
+
+    }
+    public void Clean(View v)
+    {
+        // Get the critter's name
+        critterShortName = aquariumCritter.getCritterPictureName();
+        // Display action
+        Toast.makeText(this, "You clean your " + critterShortName, Toast.LENGTH_SHORT).show();
+        // Call critter response method
+        CritterInteractResponse(aquariumCritter);
+
+    }
+    public void CritterInteractResponse(AquariumCritter aC)
+    {
+        // Get response int and text
+        critterResponseNumber = aC.CritterResponseNumber();
+        critterResponseText = aC.CritterResponse(critterResponseNumber);
+        // Use response int to set mood
+        aC.setCritterMood(critterResponseNumber);
+        // Use mood to get drawable and set image resource
+        aquariumImageView.setImageResource(displayCritterImage(aC));
+        // Set text view with response text
+        critterResponseTextView.setText(critterResponseText);
+    }
 }
