@@ -2,7 +2,7 @@ package com.alese.androidaquarium;
 
 import java.util.Random;
 
-// TODO: This is a class to create an aquarium critter object and govern its behavior.
+// This is a class to create an aquarium critter object and govern its behavior.
 public class AquariumCritter
 {
     // Variables
@@ -46,7 +46,7 @@ public class AquariumCritter
             critterSize = "Large";
             critterMeal = "Large Fish";
             critterAbility = "Cooperative hunting";
-            critterPictureName = "eel";
+            critterPictureName = "moray";
             critterMood = 1;
             // Meh
             // Content
@@ -84,7 +84,7 @@ public class AquariumCritter
         else
         {
             critterType = 4;
-            critterFullName = "Loch's Chromodoris";
+            critterFullName = "Loch's chromodoris";
             critterSize = "Tiny";
             critterMeal = "Sponge";
             critterAbility = "Poisonous skin";

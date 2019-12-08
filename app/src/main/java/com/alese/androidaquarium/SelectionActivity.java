@@ -44,8 +44,6 @@ public class SelectionActivity extends AppCompatActivity
         // Set up Spinner with ArrayAdapter data
         selectionSpinner.setAdapter(selectionAdapter);
     }
-    // TODO: Spinner for critter selection
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -75,9 +73,7 @@ public class SelectionActivity extends AppCompatActivity
         // Stub
     }
 
-    // TODO: Changing ImageView
-    // TODO: New Aquarium Button, should create Intent, put Extras, and start new Activity
-    // Handler for newAquariumButton
+    // Handler for newAquariumButton: should create Intent, put Extras, and start new Activity
     public void createNewAquarium(View v)
     {
         // Start second activity and send it the user's critter selection

@@ -4,19 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.graphics.BitmapFactory.Options;
 
 import androidx.appcompat.app.ActionBar;
 
 public class AquariumActivity extends AppCompatActivity
 {
     // Variables
-    int createdCritterInt;
-    int critterPictureID;
-
+    private int createdCritterInt;
+    private int critterPictureID;
 
     // Widget Variables
     ImageView aquariumImageView;
@@ -44,9 +45,10 @@ public class AquariumActivity extends AppCompatActivity
         critterNameTextView = (TextView) findViewById(R.id.critterNameTextView);
         critterNameTextView.setText(aquariumCritter.getCritterFullName());
 
+        BitmapFactory.Options bOptions = new BitmapFactory.Options();
+        bOptions.inSampleSize = 4;
         // execute method to display appropriate critter image
         critterPictureID = displayCritterImage(aquariumCritter);
-
         // Set the image resource to appropriate id
         aquariumImageView.setImageResource(critterPictureID);
     }
@@ -58,11 +60,12 @@ public class AquariumActivity extends AppCompatActivity
 
     }
     // TODO: ImageView
+
     public int displayCritterImage(AquariumCritter aC)
     {
         int id = 0;
         // if a Stingray
-        /*
+
         if (aC.getCritterType() == 0)
         {
             // if meh mood:
@@ -82,27 +85,26 @@ public class AquariumActivity extends AppCompatActivity
             }
         }
         // if a Moray Eel:
-        if (aC.getCritterType() == 1)
+        else if (aC.getCritterType() == 1)
         {
             // if meh mood:
             if (aC.getCritterMood() == 1)
             {
-                id = R.drawable.meh_eel;
+                id = R.drawable.meh_moray;
             }
             // if good mood:
             else if(aC.getCritterMood() == 2)
             {
-                id = R.drawable.nice_eel;
+                id = R.drawable.nice_moray;
             }
             // if awesome mood:
             else
             {
-                id = R.drawable.awesome_eel;
+                id = R.drawable.awesome_moray;
             }
         }
-         */
         // if a Sea Snake
-        if (aC.getCritterType() == 2)
+        else if (aC.getCritterType() == 2)
         {
             // if meh mood:
             if (aC.getCritterMood() == 1)
@@ -121,8 +123,7 @@ public class AquariumActivity extends AppCompatActivity
             }
         }
         // if a Frogfish:
-        /*
-        if (aC.getCritterType() == 3)
+        else if (aC.getCritterType() == 3)
         {
             // if meh mood:
             if (aC.getCritterMood() == 1)
@@ -140,7 +141,6 @@ public class AquariumActivity extends AppCompatActivity
                 id = R.drawable.awesome_frogfish;
              }
         }
-        */
         // if a Sea Slug:
         else
         {
