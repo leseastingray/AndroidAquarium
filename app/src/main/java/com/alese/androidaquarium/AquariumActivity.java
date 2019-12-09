@@ -19,6 +19,7 @@ public class AquariumActivity extends AppCompatActivity
 {
     // Variables
     private int createdCritterInt;
+    private String createdCritterName;
     private int critterPictureID;
     private String critterFood;
     private String critterShortName;
@@ -29,6 +30,7 @@ public class AquariumActivity extends AppCompatActivity
     // Widget Variables
     ImageView aquariumImageView;
     TextView critterNameTextView;
+    TextView critterCreatedNameTextView;
     TextView critterResponseTextView;
     Button feedButton;
     Button interactButton;
@@ -48,10 +50,13 @@ public class AquariumActivity extends AppCompatActivity
         // Get the intent and extras from Selection Activity
         Intent intent = getIntent();
         createdCritterInt = intent.getExtras().getInt(SelectionActivity.CRITTER_SELECTION);
+        createdCritterName = intent.getExtras().getString(SelectionActivity.CRITTER_NAME);
         aquariumCritter = new AquariumCritter(createdCritterInt);
 
         // Widgets
         aquariumImageView = (ImageView)findViewById(R.id.aquariumImageView);
+        critterCreatedNameTextView = (TextView)findViewById(R.id.critterCreatedNameTextView);
+        critterCreatedNameTextView.setText(createdCritterName);
 
         critterNameTextView = (TextView) findViewById(R.id.critterNameTextView);
         critterNameTextView.setText(aquariumCritter.getCritterFullName());
