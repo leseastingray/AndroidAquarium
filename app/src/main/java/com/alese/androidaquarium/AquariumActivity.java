@@ -79,29 +79,26 @@ public class AquariumActivity extends AppCompatActivity
         critterPictureID = displayCritterImage(aquariumCritter);
         // Set the image resource to appropriate id
         aquariumImageView.setImageResource(critterPictureID);
-
-        // Shared Preferences
-        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState)
+    protected void onSaveInstanceState(Bundle outState)
     {
-        super.onSaveInstanceState(outState);
         outState.putString("fullCritterName", fullCritterName);
         outState.putString("critterResponse", critterResponseText);
         outState.putInt("critterPictureID", critterPictureID);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
     {
         super.onRestoreInstanceState(savedInstanceState);
-        critterPictureID = savedValues.getInt("critterPictureID", critterPictureID);
-        //aquariumImageView.setImageResource(critterPictureID);
+        critterPictureID = savedInstanceState.getInt("critterPictureID", critterPictureID);
+        aquariumImageView.setImageResource(critterPictureID);
         // Set text view with response text
-        fullCritterName = savedValues.getString("fullCritterName",fullCritterName);
-        //critterNameTextView.setText(fullCritterName);
+        fullCritterName = savedInstanceState.getString("fullCritterName",fullCritterName);
+        critterNameTextView.setText(fullCritterName);
     }
 
     public int displayCritterImage(AquariumCritter aC)
