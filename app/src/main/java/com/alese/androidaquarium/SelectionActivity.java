@@ -24,7 +24,7 @@ public class SelectionActivity extends AppCompatActivity
 {
     // Fields
     public static final String CRITTER_SELECTION = "critterSelection";
-    public static final String CRITTER_NAME = "critterName";
+    //public static final String CRITTER_NAME = "critterName";
     // Variables
     public int critterSelection = 0;
     public String critterName;
@@ -32,7 +32,7 @@ public class SelectionActivity extends AppCompatActivity
     // Widget Variables
     Spinner selectionSpinner;
     Button newAquariumButton;
-    EditText critterNameEditText;
+    //EditText critterNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +41,7 @@ public class SelectionActivity extends AppCompatActivity
         setContentView(R.layout.activity_selection);
 
         // Set up Widgets
-        critterNameEditText = (EditText)findViewById(R.id.critterNameEditText);
+        //critterNameEditText = (EditText)findViewById(R.id.critterNameEditText);
         newAquariumButton = (Button)findViewById(R.id.newAquarium);
         // Set up Spinner
         selectionSpinner = (Spinner)findViewById(R.id.selectionSpinner);
@@ -85,7 +85,7 @@ public class SelectionActivity extends AppCompatActivity
                 actionId == EditorInfo.IME_ACTION_NEXT ||
                 event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
         {
-            critterName = critterNameEditText.getText().toString();
+            //critterName = critterNameEditText.getText().toString();
             newAquariumButton.hasFocus();
         }
         // Hide the soft keyboard
@@ -114,7 +114,7 @@ public class SelectionActivity extends AppCompatActivity
         // Start second activity and send it the user's critter selection
         Intent intent = new Intent(this, AquariumActivity.class);
         intent.putExtra(CRITTER_SELECTION, critterSelection);
-        intent.putExtra(CRITTER_NAME, critterName);
+        //intent.putExtra(CRITTER_NAME, critterName);
         startActivity(intent);
     }
 }

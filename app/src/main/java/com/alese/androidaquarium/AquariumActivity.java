@@ -1,8 +1,11 @@
 package com.alese.androidaquarium;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,12 +23,15 @@ public class AquariumActivity extends AppCompatActivity
     // Variables
     private int createdCritterInt;
     private String createdCritterName;
+    private String fullCritterName;
     private int critterPictureID;
     private String critterFood;
     private String critterShortName;
     private int critterResponseNumber;
     private String critterResponseText;
     private AquariumCritter aquariumCritter;
+
+    private SharedPreferences savedValues;
 
     // Widget Variables
     ImageView aquariumImageView;
@@ -50,16 +56,17 @@ public class AquariumActivity extends AppCompatActivity
         // Get the intent and extras from Selection Activity
         Intent intent = getIntent();
         createdCritterInt = intent.getExtras().getInt(SelectionActivity.CRITTER_SELECTION);
-        createdCritterName = intent.getExtras().getString(SelectionActivity.CRITTER_NAME);
+        //createdCritterName = intent.getExtras().getString(SelectionActivity.CRITTER_NAME);
         aquariumCritter = new AquariumCritter(createdCritterInt);
 
         // Widgets
         aquariumImageView = (ImageView)findViewById(R.id.aquariumImageView);
-        critterCreatedNameTextView = (TextView)findViewById(R.id.critterCreatedNameTextView);
-        critterCreatedNameTextView.setText(createdCritterName);
+        //critterCreatedNameTextView = (TextView)findViewById(R.id.critterCreatedNameTextView);
 
         critterNameTextView = (TextView) findViewById(R.id.critterNameTextView);
-        critterNameTextView.setText(aquariumCritter.getCritterFullName());
+
+        fullCritterName = aquariumCritter.getCritterFullName();
+        critterNameTextView.setText(fullCritterName);
 
         critterResponseTextView = (TextView)findViewById(R.id.responseTextView);
         feedButton = (Button)findViewById(R.id.feedButton);
@@ -72,15 +79,30 @@ public class AquariumActivity extends AppCompatActivity
         critterPictureID = displayCritterImage(aquariumCritter);
         // Set the image resource to appropriate id
         aquariumImageView.setImageResource(critterPictureID);
+
+        // Shared Preferences
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
     @Override
-    protected void onResume()
+    protected void onSaveInstanceState(@NonNull Bundle outState)
     {
-        super.onResume();
-
+        super.onSaveInstanceState(outState);
+        outState.putString("fullCritterName", fullCritterName);
+        outState.putString("critterResponse", critterResponseText);
+        outState.putInt("critterPictureID", critterPictureID);
     }
-    // TODO: ImageView
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        critterPictureID = savedValues.getInt("critterPictureID", critterPictureID);
+        //aquariumImageView.setImageResource(critterPictureID);
+        // Set text view with response text
+        fullCritterName = savedValues.getString("fullCritterName",fullCritterName);
+        //critterNameTextView.setText(fullCritterName);
+    }
 
     public int displayCritterImage(AquariumCritter aC)
     {
@@ -220,7 +242,8 @@ public class AquariumActivity extends AppCompatActivity
         // Use response int to set mood
         aC.setCritterMood(critterResponseNumber);
         // Use mood to get drawable and set image resource
-        aquariumImageView.setImageResource(displayCritterImage(aC));
+        critterPictureID = displayCritterImage(aC);
+        aquariumImageView.setImageResource(critterPictureID);
         // Set text view with response text
         critterResponseTextView.setText(critterResponseText);
     }
